@@ -1,0 +1,29 @@
+﻿建立用户：
+一、先以root身份登录到theory01： ssh 10.144.19.12 (theory01.grid.local)，公校内使用 U/P：root/whzc@2008:登录：ssh 10.144.19.12，用户名：root, 密码：whzc@2008
+
+二、Adduser <id>  建立用户：useradd -d userhome -g GID username :
+                      说明：USERHOME 代表用户的主目录，GID 为组ID (theory01)
+                       比如 useradd -d /home/xieman -g 01 xieman
+                                          目录       节点(01) 用户名
+								     -d<登入目录> 　指定用户登入时的启始目录。  
+Passwd <id>   设置密码   : passwd username:passwd xieman.然后输入两遍密码。
+
+三、cd /var/yp
+   Make 推送到其它节点:找到var/yp,在这个目录下输入make回车即可。这样新用户才可以编辑应用。
+
+四、提交任务：
+***有两个队列：zhanghz,zhangbw分别提供不同的小组使用
+Srun –o <filename> -p <zhanghz|zhangbw> -j <jobname> job &
+-o：标准输入输出重点向到文件（收集结果和错误信息）
+-p：使用哪个队列
+-j：为任务提供一个名字
+&：放入后台,srun不会自动放后台，没有&会一直等任务结束后才退出
+screen -S 1 进入虚拟窗口
+
+五、常用命令
+1、squeue 查看任务状态
+2、sinfo查看队列、节点状态
+3、scancel <jobid> 删除提交的作业,jobid可从squeue查看到
+
+
+操作系统：CentOS7
